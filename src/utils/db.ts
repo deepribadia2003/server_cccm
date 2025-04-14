@@ -16,12 +16,18 @@
 // export default connectDB; 
 
 
+<<<<<<< HEAD
 
 import { MongoClient, ServerApiVersion } from 'mongodb';
+=======
+// config/db.ts
+import mongoose from 'mongoose';
+>>>>>>> 754c35f65127b850e23645e65eac9047728be687
 import dotenv from 'dotenv';
 
 dotenv.config();
 
+<<<<<<< HEAD
 const uri = process.env.MONGO_URI_Prod!
 
 // Create a MongoClient with a MongoClientOptions object
@@ -56,5 +62,24 @@ process.on('SIGINT', async () => {
   console.log('MongoDB connection closed due to app termination');
   process.exit(0);
 });
+=======
+const uri = process.env.MONGO_URI_Prod!;
+
+const connectDB = async () => {
+  if (mongoose.connection.readyState === 1) return; // already connected
+
+  try {
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    } as any); // `as any` to satisfy TypeScript
+
+    console.log("✅ Successfully connected to MongoDB via Mongoose!");
+  } catch (error) {
+    console.error("❌ MongoDB connection error:", error);
+    process.exit(1);
+  }
+};
+>>>>>>> 754c35f65127b850e23645e65eac9047728be687
 
 export default connectDB;
